@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Accessing The Pom Properties At Runtime"
+date: 2018-18-03
+---
+
 Recently, I found myself needing to access specific POM properties during runtime, specifically the version-related properties: artifact id, group id, and version. After a bit of exploration, I found at least three ways to achieve this.
 
 Each approach comes with its pros and cons, so feel free to choose the one that resonates best with your needs.
