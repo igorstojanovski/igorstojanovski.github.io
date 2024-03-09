@@ -1,8 +1,6 @@
 title: Igorski's blog
-description: Manuals to untangling software developemnt
-author:
-  name: Igor Stojanovski
-  twitter: igorskiCo
+description: Code. Learn. Repeat.
+author.name: Igor Stojanovski
 theme: jekyll-theme-minimal
 
 paginate: 5
