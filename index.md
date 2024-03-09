@@ -2,13 +2,22 @@
 layout: default
 ---
 
-<small>{{ page.date | date: "%-d %B %Y" }}</small>
-<h1>{{ page.title }}</h1>
+<ul>
+  {% for post in paginator.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      <p>{{ post.excerpt }}</p>
+    </li>
+  {% endfor %}
+</ul>
 
-<p class="view">by {{ page.author | default: site.author }}</p>
+<!-- Pagination Links -->
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+  {% endif %}
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+  {% endif %}
+</div>
 
-{{content}}
-
-{% if page.tags %}
-  <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
-{% endif %}
