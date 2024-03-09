@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Accessing The Pom Properties At Runtime"
+excerpt: "A couple of alternativs to fetch the pom properties at runtime."
 date: 2018-03-18
 ---
 
