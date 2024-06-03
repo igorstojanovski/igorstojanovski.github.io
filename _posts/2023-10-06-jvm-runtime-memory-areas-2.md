@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Understanding the JVM Runtime Memory Areas for Better Garbage Collection"
+excerpt: "Dive into the complex world of Java Virtual Machine (JVM) to understand its key runtime memory areas like heap, stack, and method area. Master these to optimize Java Garbage Collection and boost your application's performance. Part 2 in a GC series."
+date: 2023-10-06
+---
+
 This is the [second post](https://igorski.co/taking-out-the-trash-demystifying-jvms-garbage-collection/) in a series about Garbage Collection (GC). If you missed the first part, we introduced what GC is and discussed various GC implementations. Today, we're diving deeper into the fascinating world of the Java Virtual Machine (JVM) to understand its runtime memory areas. After all, you can't master garbage collection without first understanding how memory is organized. Let's get started!
 
 ℹ️
