@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Kubernetes Cheat Sheet"
+excerpt: "Kubectl cheat sheet for Kubernetes. It contains commands I use most often while working with K8S. It is not complete. I will keep adding commands and re-organizing sections as this list grows."
+date: 2021-05-18
+---
+
 This is my **kubectl** cheat sheet for Kubernetes. It contains commands I use most often while working with K8S. It is not complete. I will keep adding commands and re-organizing sections as this list grows. I do it primarily for myself but if I am able to help at least someone else out there, I would be extremely happy.
 
 ## Overview
