@@ -1,7 +1,15 @@
 .main-header {
-    width: 270px;
     float: left;
+    position: fixed;
     -webkit-font-smoothing: subpixel-antialiased;
     display: grid;
-    place-items: center;
+    align-content: space-around;
+    justify-content: center;
+    align-items: stretch;
+    justify-items: center;
+}
+
+.logo {
+    max-width: 150px; /* Adjust as needed */
+    height: auto;
 }
