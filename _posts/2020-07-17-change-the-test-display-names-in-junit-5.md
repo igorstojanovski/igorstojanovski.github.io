@@ -1,0 +1,115 @@
+---
+layout: post
+title: "Change the test display names in JUnit 5"
+excerpt: "Test names usually tend to become very long and difficult to read."
+date: 2020-07-17
+tags: [JUnit 5, Testing]
+feature_image: __GHOST_URL__/content/images/2020/07/mec-rawlings-yDs3UCbhTX4-unsplash.jpg
+---
+
+In one of my [previous posts](__GHOST_URL__/running-tests-in-parallel-with-junit-5/) I used the **@DisplayName** annotation in one of the code examples. It is a new annotation introduced in JUnit 5 and, as the name suggests, it is used to set a display name for a test method or a test class.
+
+## The test name problem
+
+Test names usually tend to become very long and difficult to read. Depending on the naming convention you use, you could have some mandatory words like "should" or "test" or you could be using snake case. All of that contributes to longer names which makes the test results difficult to read in test reports, in IDEs and build tools.
+
+Let us look at a simple example.
+
+```java
+public class PaymentEventProcessorTest {
+
+    @Test
+    void shouldRetrieveOnlyFinancialEventsOfTypePaymentWithAValidStatus() {
+      ....
+    }
+}
+```
+
+The code is not very readable. Running also produces not so readable logs:
+
+```java
+PaymentEventProcessorTest > shouldRetrieveOnlyFinancialEventsOfTypePaymentWithAValidStatus() PASSED
+```
+
+Imagine having a class with tens of tests with names like these or logs with hundreds. That would not be easy to read. Sometimes, we find tests with names that are not descriptive enough.
+
+```java
+    void shouldRetrieveOnlyValidEvents() {
+      ....
+    }
+```
+
+That doesn't say much about what valid means.
+
+## Change the test display name using @DisplayName
+
+To help us avoid this problem, **JUnit 5** allows us to set custom test display names, different from the test method names. We can set these display names with the **DisplayName** annotation. In this way, as display names, we can have complete sentences for display names, using spaces and punctuation. We can even use emojis if we want to do that for some reason. Let us see how it works.
+
+The **DisplayName** annotation takes a **String** as an argument.
+
+```java
+@DisplayName("Dummy class for a DisplayName example.")
+public class DisplayNameExampleTest {
+    @Test
+    @DisplayName("Should test that only financial events of type payment with valid status are retrieved.")
+    void shouldRetrieveOnlyValidEvents() {
+
+    }
+}
+```
+
+The annotation can be used both on class and method level. As such, it can modify both the way the class name and the test name is displayed in logs. The log now is:
+
+```java
+Dummy class for a DisplayName example. > Should test that only financial events of type payment with valid status are retrieved. PASSED
+```
+
+That makes both the log and the code more readable. In the code, now we can set a shorter, less obvious name, and add more description in the DisplayName annotation.
+
+## Using display name generators
+
+Instead of annotation each test with DisplayName, you could annotate the class with a **DisplayNameGenerator** which takes as an argument a class that extends the **DisplayNameGenerator** interface. This can help us define general display name naming conventions that we can apply on a single class or globally. One such example is the **ReplaceUnderscores** generator. In case when you use snake case to name your tests, it will replace all underscores it the test method name, and set that as a display name.
+
+```java
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+public class PaymentEventProcessorTest {
+
+    @Test
+    void retrieve_only_financial_events_of_type_payment_with_a_validStatus() {
+
+    }
+}
+```
+
+In the logs, this will generate:
+
+```java
+PaymentEventProcessorTest > retrieve only financial events of type payment with a validStatus PASSED
+```
+
+### Implementing your own DisplayNameGenerator
+
+Implementing your DisplayNameGenerator is easy. You have three methods that you have to implement. Those three methods control the display name of the test class, nested test classes and test methods.
+
+```java
+public class SampleDisplaynameGenerator implements DisplayNameGenerator {
+    @java.lang.Override
+    public java.lang.String generateDisplayNameForClass(java.lang.Class<?> testClass) {
+        return null;
+    }
+
+    @java.lang.Override
+    public java.lang.String generateDisplayNameForNestedClass(java.lang.Class<?> nestedClass) {
+        return null;
+    }
+
+    @java.lang.Override
+    public java.lang.String generateDisplayNameForMethod(java.lang.Class<?> testClass, java.lang.reflect.Method testMethod) {
+        return null;
+    }
+}
+```
+
+This offers quite a lot of flexibility in shaping how your test names are printed in your reports. It allows you to get even a bit creative. So use your chance. Make your test name graffiti :)
+
+It is important to note that if a **DisplayName** annotation is present, it will always take precedence. Or in other words, the value generated by the **DisplayNameGenerator** will be ignored.
