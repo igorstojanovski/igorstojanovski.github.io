@@ -1,7 +1,10 @@
 title: Igorski's blog
 description: Code. Learn. Repeat.
-author.name: Igor Stojanovski
+author:
+  name: Igor Stojanovski
 theme: jekyll-theme-minimal
 logo: /assets/img/logo.png
+plugins:
+  - jekyll-paginate
 paginate: 5
 paginate_path: "/page:num/"
